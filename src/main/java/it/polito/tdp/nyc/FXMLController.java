@@ -41,7 +41,7 @@ public class FXMLController {
     private TableColumn<?, ?> clV2; // Value injected by FXMLLoader
 
     @FXML // fx:id="cmbBorough"
-    private ComboBox<?> cmbBorough; // Value injected by FXMLLoader
+    private ComboBox<String> cmbBorough; // Value injected by FXMLLoader
 
     @FXML // fx:id="tblArchi"
     private TableView<?> tblArchi; // Value injected by FXMLLoader
@@ -58,11 +58,29 @@ public class FXMLController {
     @FXML
     void doAnalisiArchi(ActionEvent event) {
     	
+    	this.txtResult.appendText("Peso medio archi: " + this.model.getPesoMedio());
+    	
+    	this.txtResult.appendText("\nArchi con peso oltre la media: " + this.model.getArchiSopraMedia());
 
     }
 
     @FXML
     void doCreaGrafo(ActionEvent event) {
+    	
+    	String borgo = this.cmbBorough.getValue();
+    	
+    	if(borgo == null) {
+    		this.txtResult.setText("Scegliere un valore dalla combobox.");
+    		return;
+    	}
+    	
+    	this.model.creaGrafo(borgo);
+    	
+    	this.txtResult.setText("Grafo creato.\n");
+    	this.txtResult.appendText("Vertici: " + this.model.numVertici() + "\n");
+    	this.txtResult.appendText("Archi  : " + this.model.numArchi() + "\n");
+
+
     	
     }
 
@@ -90,6 +108,9 @@ public class FXMLController {
     
     public void setModel(Model model) {
     	this.model = model;
+    	
+    	this.cmbBorough.getItems().addAll(this.model.getBorghi());
+    	
     }
 
 }
