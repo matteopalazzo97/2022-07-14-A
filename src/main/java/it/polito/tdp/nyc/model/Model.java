@@ -1,9 +1,6 @@
 package it.polito.tdp.nyc.model;
 
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-
 import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
 import org.jgrapht.graph.DefaultWeightedEdge;
